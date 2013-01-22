@@ -1,0 +1,84 @@
+<html>
+<head><title>VTU RESULTS CHECKERS</title></head>
+<body>
+<script>
+
+function search()
+{
+var usn=document.getElementById("usn");
+//alert("inside");
+    $("#loading").show();
+
+//document.write("this"+movie.value);
+
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+  var n=xmlhttp.responseText.match(/not yet available/g);
+if(n!=null)
+{
+     //document.getElementById("myDiv").innerHTML="<h1>Results are not yet available for USN <font color=red>"+usn.value+"</font>.Trying again in 10 seconds</h1>";
+       //window.setTimeout("display("+usn.value+",10)",1000);
+       document.getElementById("myDiv").innerHTML="<h1>Results are <font color=red>NOT YET AVAILABLE</font> for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
+        window.setTimeout("display(10)",1000);
+          $("#loading").hide();
+        window.setTimeout("search()", 10000);
+
+}
+     else
+     {
+    document.getElementById("myDiv").innerHTML="<h1>Result ARE <font color=red>OUT</font> for USN <font color=green>"+usn.value+"</font></h1>"+xmlhttp.responseText;
+     $("#loading").hide();
+    }
+    }
+  }
+  xmlhttp.open("GET","vturesfetch.php?q="+usn.value,true);
+xmlhttp.send();
+}
+function display(t)
+{
+var usn=document.getElementById("usn");
+//alert("inhere");
+t=t-1;
+document.getElementById("myDiv").innerHTML="<h1>Results are <font color=red>NOT YET AVAILABLE</font> for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>"+t+"</font> seconds</h1>";
+if(t>0)
+window.setTimeout("display("+t+")",1000);
+}
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+ $("#loading").hide();
+  $("button").click(function(){
+    $("#loading").show();
+     document.getElementById("myDiv").innerHTML="";
+  });
+});
+</script>
+<h1>VTU CHECKER</h1>
+<form action="" method=POST>
+<h2>Enter USN : </h2><input type="text" name="usn" id="usn"></br>
+<!--<input type="submit" name="submit" onclick="search1(this.form)" value="GET TORRENT">-->
+<button type="button" onclick="search()">GET RESULT</button>
+</form>
+<div id="loading" >
+   <h2> Getting Your Results.. Please Wait....</h2>
+    <img src="ajax-loader.gif" alt="Loading" />
+</div>
+<div id="myDiv">
+
+</div>
+
+</body>
+</html>
