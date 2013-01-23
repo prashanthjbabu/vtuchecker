@@ -24,6 +24,8 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
+          clearTimeout(xmlHttpTimeout); 
+
   var n=xmlhttp.responseText.match(/not yet available/g);
 if(n!=null)
 {
@@ -38,8 +40,6 @@ if(n!=null)
      else
      {
      alert(xmlhttp.responseText.length);
-     var n1=xmlhttp.responseText.match(/ /g);
-     if(n1!=null) alert("blank");
     document.getElementById("myDiv").innerHTML="<h1>Result ARE <font color=red>OUT</font> for USN <font color=green>"+usn.value+"</font></h1>"+xmlhttp.responseText;
      $("#loading").hide();
      playSound('bing');
@@ -55,6 +55,16 @@ if(n!=null)
   }
   xmlhttp.open("GET","vturesfetch.php?q="+usn.value,true);
 xmlhttp.send();
+var xmlHttpTimeout=setTimeout(ajaxTimeout,8000);
+function ajaxTimeout(){
+var usn=document.getElementById("usn");
+   xmlhttp.abort();
+   //alert("Request timed out");
+   document.getElementById("myDiv").innerHTML="<h1>Error communicating with VTU Server for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
+        window.setTimeout("display2(10)",1000);
+        $("#loading").hide();
+        window.setTimeout("search()", 10000);
+}
 }
 function display(t)
 {
