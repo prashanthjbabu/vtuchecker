@@ -9,7 +9,7 @@ $results=$pieces[245];
 //array_shift($pieces);
 //$results = implode("\n", $pieces);
 //echo $results;
-
+echo sizeof($pieces);
 echo $results;
 
 
