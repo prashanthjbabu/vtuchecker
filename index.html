@@ -37,6 +37,8 @@ if(n!=null)
 }
      else
      {
+     var n1=xmlhttp.responseText.match(/ /g);
+     if(n1!=null) alert("blank");
     document.getElementById("myDiv").innerHTML="<h1>Result ARE <font color=red>OUT</font> for USN <font color=green>"+usn.value+"</font></h1>"+xmlhttp.responseText;
      $("#loading").hide();
      playSound('bing');

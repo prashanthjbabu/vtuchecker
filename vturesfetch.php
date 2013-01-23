@@ -9,9 +9,9 @@ $results=$pieces[245];
 //array_shift($pieces);
 //$results = implode("\n", $pieces);
 //echo $results;
-echo sizeof($pieces);
+//echo sizeof($pieces);
 echo $results;
-echo "<br>DEBUG = ".$pieces[0];
+//echo "<br>DEBUG = ".$pieces[0];
 
 
 ?>
