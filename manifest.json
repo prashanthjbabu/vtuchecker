@@ -1,0 +1,13 @@
+{
+  "name": "vtu checker",
+  "description": "checks your vtu results",
+  "launch_path": "/",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Prashanth",
+    "url": "http://vtuchecker.herokuapp.com"
+  },
+  "default_locale": "en"
+}
