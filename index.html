@@ -53,6 +53,13 @@ if(n!=null)
      $("#loading").hide();
      playSound('bing');
     }
+     else
+    {
+    document.getElementById("myDiv").innerHTML="<h1>Error communicating with VTU Server for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
+        window.setTimeout("display2(10)",1000);
+        $("#loading").hide();
+        window.setTimeout("search()", 10000);
+    }
     }
     else if(xmlhttp.readyState==4 && xmlhttp.status==404)
     {
@@ -61,13 +68,7 @@ if(n!=null)
         $("#loading").hide();
         window.setTimeout("search()", 10000);
     }
-    else
-    {
-    document.getElementById("myDiv").innerHTML="<h1>Error communicating with VTU Server for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
-        window.setTimeout("display2(10)",1000);
-        $("#loading").hide();
-        window.setTimeout("search()", 10000);
-    }
+   
   }
   xmlhttp.open("GET","vturesfetch.php?q="+usn.value,true);
 xmlhttp.send();
