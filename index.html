@@ -46,7 +46,7 @@ if(n!=null)
         window.setTimeout("search()", 10000);
 
 }
-     else
+     else if(xmlhttp.responseText.length!=0)
      {
      //alert(xmlhttp.responseText.length);
     document.getElementById("myDiv").innerHTML="<h1>Result ARE <font color=red>OUT</font> for USN <font color=green>"+usn.value+"</font></h1>"+xmlhttp.responseText;
@@ -57,6 +57,13 @@ if(n!=null)
     else if(xmlhttp.readyState==4 && xmlhttp.status==404)
     {
      document.getElementById("myDiv").innerHTML="<h1>Error communicating with VTU Server for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
+        window.setTimeout("display2(10)",1000);
+        $("#loading").hide();
+        window.setTimeout("search()", 10000);
+    }
+    else
+    {
+    document.getElementById("myDiv").innerHTML="<h1>Error communicating with VTU Server for USN <font color=green>"+usn.value+"</font> . Trying again in <font color=blue>10</font> seconds</h1>";
         window.setTimeout("display2(10)",1000);
         $("#loading").hide();
         window.setTimeout("search()", 10000);
